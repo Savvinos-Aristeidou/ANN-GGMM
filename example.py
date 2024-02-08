@@ -1,15 +1,3 @@
-# ANN GGMM
- Generalised ground motion model developed using artificial neural network
-
-### 1. Install requirements
-
-```shell
-pip3 install -r requirements.txt
-```
-
-### 2. Run a sample code (example.py)
-
-```python
 from gmpe import AristeidouEtAl2024
 
 
@@ -31,4 +19,3 @@ mean, stdev = gmpe.get_mean_and_stddevs(
 )
 
 print("Output", mean, stdev)
-```
