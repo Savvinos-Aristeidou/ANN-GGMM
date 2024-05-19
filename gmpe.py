@@ -188,7 +188,12 @@ class AristeidouEtAl2024:
         # Means (shape=(cases, n_im)) and standard deviations (n_im, )
         means = np.squeeze(np.log(output))
 
-        stddevs = np.asarray(self.DATA["total-stdev"])
+        stddevs = np.asarray((self.DATA["total-stdev"],
+                              self.DATA["inter-stdev"],
+                              self.DATA["intra-stdev"]))
+
+        # Transform the standard deviations from log10 to natural logarithm
+        stddevs = np.log(10**stddevs)
 
         # Get the means and stddevs at index corresponding to the IM
         return self._get_means_stddevs(imt, means, stddevs,
@@ -207,7 +212,7 @@ class AristeidouEtAl2024:
 
         if im_name in supported_ims:
             idx = np.where(supported_ims == im_name)[0][0]
-            return means[:, idx], stddevs[idx]
+            return means[:, idx], stddevs[:, idx]
 
         im_type, period = get_period_im(im_name)
 
@@ -221,7 +226,7 @@ class AristeidouEtAl2024:
 
         ims = supported_ims[idxs]
         means = means[:, idxs]
-        stddevs = stddevs[idxs]
+        stddevs = stddevs[:, idxs]
 
         periods = []
         for im in ims:
