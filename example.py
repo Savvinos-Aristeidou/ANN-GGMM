@@ -1,3 +1,4 @@
+import numpy as np
 from gmpe import AristeidouEtAl2024
 
 
@@ -18,4 +19,4 @@ mean, stdev = gmpe.get_mean_and_stddevs(
     ztor=[1, 1],
 )
 
-print("Output", mean, stdev)
+print("Output", mean, np.squeeze(stdev))
