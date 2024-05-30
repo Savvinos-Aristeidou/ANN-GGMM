@@ -1,7 +1,7 @@
 import numpy as np
 from gmpe import AristeidouEtAl2024
 
-
+# Insert the period with at least 1 decimal point
 im_name = "FIV3(0.88s)"
 
 gmpe = AristeidouEtAl2024()
@@ -17,6 +17,7 @@ mean, stdev = gmpe.get_mean_and_stddevs(
     z2pt5=[1000, 1000],
     rx=[30, 30],
     ztor=[1, 1],
+    component_definition="RotD50"
 )
 
-print("Output", mean, np.squeeze(stdev))
+print("Output", np.exp(mean), np.squeeze(stdev))

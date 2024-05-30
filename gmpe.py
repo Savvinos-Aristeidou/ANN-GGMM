@@ -233,11 +233,12 @@ class AristeidouEtAl2024:
             _, _t = get_period_im(im)
             periods.append(_t)
 
+        # TODO: make the interpolation on the logarithmic scale (like openquake)
         # Create interpolators
-        interp_stddevs = interp1d(periods, stddevs)
-        interp_means = interp1d(periods, means)
+        interp_stddevs = interp1d(np.log(periods), stddevs)
+        interp_means = interp1d(np.log(periods), means)
 
-        mean, stddev = np.squeeze(interp_means(period)), interp_stddevs(period)
+        mean, stddev = np.squeeze(interp_means(np.log(period))), interp_stddevs(np.log(period))
 
         return mean, stddev
 
